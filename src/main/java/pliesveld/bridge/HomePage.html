@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Bridge Score</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- <link rel="stylesheet" href="vendors/jquery.mobile-1.4.5.css" type="text/css" media="screen"/> -->
+    <link rel="stylesheet" href="css/themes/bridge.min.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="vendors/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+    <script src="vendors/jquery-2.1.4.min.js"></script>
+    <script src="program.js"></script>
+    <script src="vendors/jquery.mobile-1.4.5.min.js"></script>
+
+
+
+</head>
+
+
+<body>
+<div data-role="page" id="page1" data-title="Display Game">
+    <div data-role="header"><h1>Bridge Score</h1><a href="#page2" data-icon="plus" data-transition="pop">add</a></div>
+
+    <div wicket:id="score-panel" id="score-panel" class="score">##score panel##</div>
+    <div wicket:id="rubber-panel" id="rubber-panel" class="rubber">##rubber panel##</div>
+
+    <div data-role="footer" >
+        <a href="#page1" wicket:id="link-refresh" data-icon="refresh">refresh</a>
+        <a href="#page3" data-icon="lock">settings</a>
+    </div>
+</div>
+
+<div data-role="page" id="page2" date-title="Hand Record">
+    <div data-role="header"><a href="#page1" data-icon="back" data-transition="pop" data-direction="reverse">back</a><h1>Record Hand Play</h1></div>
+
+    <div wicket:id="form-panel" id="form-panel" class="form auction"></div>
+
+    <div id="feedbackPanel"><span wicket:id="feedback"/></div>
+</div>
+
+<div data-role="page" id="page3" date-title="Settings">
+    <div data-role="header"><h1>Settings</h1></div>
+
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-theme="e" data-divider-theme="c">
+            <li data-role="list-divider">table options</li>
+            <li><a href="#page1" wicket:id="link-nextdealer" class="ui-icon-recycle">change dealer</a></li>
+            <li><a href="#" class="ui-icon-comment">rename players</a></li>
+            <li><a href="#dialog_confirm_reset"  class="ui-icon-delete">reset score</a></li>
+            <li><a href="#dialog_confirm_reset_last_game" class="ui-icon-recycle">remove last score</a></li>
+            <li data-role="list-divider">service options</li>
+            <li><a href="#dialog_service_sessions" class="ui-icon-info">session info</a></li>
+            <li><a href="#dialog_service_renders" class="ui-icon-gear">service diagnostics</a></li>
+        </ul>
+    </div>
+
+    <div data-role="footer" class="ui-bar">
+        <a href="#page1" data-icon="recycle">return</a>
+    </div>
+</div>
+
+<div data-role="page" id="dialog_players_rename" data-dialog="true">
+    <div data-role="header">
+        <h2>rename</h2>
+    </div>
+    <div class="ui-content" role="main">
+        <h3>This is a placeholder for renaming players.</h3>
+        <div class="ui-fieldcontain ui-hide-label">
+            <fieldset data-role="controlgroup">
+<!--                <select wicket:id='seat'></select> -->
+                <input type="text">
+            </fieldset>
+        </div>
+
+
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <a href="#page3" id="cancel-button" class="ui-btn ui-btn-a ui-shadow ui-corner-all">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div data-role="page" id="dialog_confirm_reset" data-dialog="true">
+  <div data-role="header">
+    <h2>Are you sure?</h2>
+  </div>
+  <div class="ui-content" role="main">
+    <h2>Are you sure you wish to reset the score?</h2>
+    <p>This will reset the score and erase the entire hand history.</p>
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#page1" wicket:id="link-resetgame" class="ui-btn ui-shadow ui-corner-all">Reset</a>
+      </div>
+      <div class="ui-block-b">
+        <a href="#page3" id="cancel-button" class="ui-btn ui-btn-b ui-shadow ui-corner-all">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-role="page" id="dialog_confirm_reset_last_game" data-dialog="true">
+    <div data-role="header">
+        <h2>Are you sure?</h2>
+    </div>
+    <div class="ui-content" role="main">
+        <h2>Are you sure you wish to remove the last score?</h2>
+        <p>This will remove the most recent hand submitted, and then recalculate the score from the hand history.</p>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="#page1" wicket:id="link-popgame" class="ui-btn ui-shadow ui-corner-all">Reset</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#page3" id="cancel-button" class="ui-btn ui-btn-b ui-shadow ui-corner-all">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="dialog_service_sessions" data-dialog="true">
+    <div data-role="header">
+        <h2>sessions</h2>
+    </div>
+    <div class="ui-content" role="main">
+        <h3>This is a placeholder for the display of the web service activity.</h3>
+        <span wicket:id="clientinfo" class="ui-bar ui-bar-b ui-btn-inline ui-panel-inner">SESSION INFO</span>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <a href="#page3" id="cancel-button" class="ui-btn ui-btn-a ui-shadow ui-corner-all">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="dialog_service_renders" data-dialog="true">
+    <div data-role="header">
+        <h2>renders</h2>
+    </div>
+    <div class="ui-content" role="main">
+        <h3>This is a placeholder for the state of internal components.</h3>
+        <span class="ui-bar ui-bar-b ui-panel-inner">SERVICE INFO</span>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <a href="#page3" id="cancel-button" class="ui-btn ui-btn-a ui-shadow ui-corner-all">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

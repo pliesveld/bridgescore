@@ -1,0 +1,67 @@
+
+div#score-container
+{
+    text-align: center;
+}
+
+div#score-container .ui-grid-solo > :first-child
+{
+    font-family: georgia, times, serif;
+}
+
+#score-container label.team1,
+#score-container label.team2
+{
+    font-family: impact;
+}
+
+#score-container label.team1
+{
+    color: rgb(51, 102, 153);
+}
+
+#score-container label.team2
+{
+    font-family: impact;
+	color: rgb(204, 51, 0);
+}
+
+#score-container label.totalscore
+{
+/* 	border: 2px solid #00ff00; */
+	font-size: 24pt;
+}
+
+fieldset
+{
+	border: 2px 1px 2px;
+    padding-left: 4px;
+	text-align:center;
+}
+
+.center-wrapper{
+  text-align: center;
+}
+.center-wrapper * {
+  margin: 0 auto;
+}
+
+fieldset > select
+{
+    padding: 10px 3px 10px;
+}
+
+label > input {
+	visibility: hidden; /* Makes input not-clickable */
+	position: absolute; /* Remove input from document flow */
+}
+
+label > input + span {      /* SPAN STYLES FOR CARD SUITS */
+	cursor:pointer;
+	border:2px solid transparent;
+	font-size:52pt;
+}
+
+label > input:checked + span { /* (RADIO CHECKED) SPAN STYLES */
+	border: 2px solid #f00; 
+}

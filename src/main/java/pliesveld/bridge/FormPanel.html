@@ -1,0 +1,38 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+<div data-role="main" class="ui-content">
+    <form wicket:id="auctionForm" id="auctionForm" data-ajax="false">
+    <div class="ui-fieldcontain ui-hide-label">
+        <fieldset class="auction" data-role="controlgroup">
+            <select wicket:id='seat' data-overlay-theme="e"></select>
+        </fieldset>
+
+        <fieldset class="auction" data-role="controlgroup">
+            <select wicket:id='suit' data-overlay-theme="e"></select>
+        </fieldset>
+
+        <fieldset class="auction" data-role="controlgroup">
+            <legend>Contract Level:</legend>
+            <input type="range" wicket:id="level" id="contract_level" name="contract_level" min="1" max="7" value="1" data-role="slider" required/>
+        </fieldset>
+
+        <fieldset class="auction" data-role="controlgroup">
+            <select wicket:id='penalty' data-overlay-theme="e"></select>
+        </fieldset>
+
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider"><span id="contract_result"></span></li>
+            <li><span id="contract_result_by"></span></li>
+        </ul>
+
+        <fieldset class="auction tricks" data-role="controlgroup">
+            <legend>Ticks Taken by Declarer:</legend>
+            <input type="range" wicket:id="tricks" id="tricks_taken" name="tricks" min="0" max="13" value="7" data-role="slider" required />
+        </fieldset>
+
+        <fieldset class="auction" data-role="controlgroup">
+            <input type="submit" value="submit" data-role="button" data-inline="true" data-icon="check" data-transition="pop" data-direction="reverse"/>
+        </fieldset>
+    </div>
+</form>
+</div>
+</wicket:panel>
