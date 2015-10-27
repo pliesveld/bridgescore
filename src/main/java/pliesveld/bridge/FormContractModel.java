@@ -14,11 +14,11 @@ import pliesveld.bridge.model.Suit;
 
 public final class FormContractModel implements IClusterable {
 
-    private Seat seat;
-    private Suit suit;
-    private int level;
-    private Penalty penalty;
-    private int tricks;
+    private Seat seat = Seat.SOUTH;
+    private Suit suit = Suit.CLUBS;
+    private int level = 1;
+    private Penalty penalty = Penalty.UNDOUBLED;
+    private int tricks = 7;
 
     @Override
     public String toString()
