@@ -12,12 +12,6 @@ public enum Suit {
         boolean isMajor() {
             return false;
         }
-
-        @Override
-        public String toString()
-        {
-            return "\u2663";
-        }
     },
     DIAMONDS {
         boolean isMinor() {
@@ -26,12 +20,6 @@ public enum Suit {
 
         boolean isMajor() {
             return false;
-        }
-
-        @Override
-        public String toString()
-        {
-            return "\u2666";
         }
     },
     HEARTS {
@@ -42,12 +30,6 @@ public enum Suit {
         boolean isMajor() {
             return true;
         }
-
-        @Override
-        public String toString()
-        {
-            return "\u2665";
-        }
     },
     SPADES {
         boolean isMinor() {
@@ -57,12 +39,6 @@ public enum Suit {
         boolean isMajor() {
             return true;
         }
-
-        @Override
-        public String toString()
-        {
-            return "\u2660";
-        }
     },
     NOTRUMP {
         boolean isMinor() {
@@ -71,12 +47,6 @@ public enum Suit {
 
         boolean isMajor() {
             return false;
-        }
-
-        @Override
-        public String toString()
-        {
-            return "NT";
         }
     };
 

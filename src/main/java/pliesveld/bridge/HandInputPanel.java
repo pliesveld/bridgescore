@@ -1,14 +1,17 @@
 package pliesveld.bridge;
 
 
+import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.EnumChoiceRenderer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RangeTextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.util.lang.Classes;
 import pliesveld.bridge.model.*;
 
 import java.util.Arrays;
@@ -29,28 +32,29 @@ public class HandInputPanel extends BasePanel {
         public ContractForm(final String id)
         {
             super(id);
+            /*
+                CompoundPropertyModel provides a container model for looking this form's
+                children components based on their registered id.  _formContractModel must
+                contain getters and setters for each child member that is to be resolved.
+             */
             setDefaultModel(new CompoundPropertyModel<>(_formContractModel));
 
             setMarkupId("auctionForm");
 
-
-            add((choiceSeatField = new DropDownChoice<Seat>("seat",
-                    Model.of(Seat.SOUTH),
-                    Arrays.asList(Seat.values()))));
+            add(choiceSeatField = new DropDownChoice<Seat>("seat",
+                    Arrays.asList(Seat.values()),
+                    new EnumChoiceRenderer<Seat>(this)));
             choiceSeatField.setRequired(true);
 
-
             add((choiceSuitField = new DropDownChoice<Suit>("suit",
-                    Model.of(Suit.CLUBS),
-                    Arrays.asList(Suit.values()))));
+                    Arrays.asList(Suit.values()),
+                    new EnumChoiceRenderer<Suit>(this))));
             choiceSuitField.setRequired(true);
 
-
             add((choicePenaltyField = new DropDownChoice<Penalty>("penalty",
-                    Model.of(Penalty.UNDOUBLED),
-                    Arrays.asList(Penalty.values()))));
+                    Arrays.asList(Penalty.values()),
+                    new EnumChoiceRenderer<Penalty>(this))));
             choicePenaltyField.setRequired(true);
-
 
             rangeLevelField = new RangeTextField<Integer>("level");
             rangeLevelField.setMinimum(1);
@@ -72,13 +76,12 @@ public class HandInputPanel extends BasePanel {
             if (objModel instanceof FormContractModel)
             {
                 FormContractModel fcm = (FormContractModel)objModel;
-                Suit t_suit = (Suit)choiceSuitField.getDefaultModelObject();
-                Seat t_seat = (Seat)choiceSeatField.getDefaultModelObject();
-                Penalty t_penalty = (Penalty)choicePenaltyField.getDefaultModelObject();
 
-                fcm.setSuit(t_suit);
-                fcm.setSeat(t_seat);
-                fcm.setPenalty(t_penalty);
+                LOG.trace("FormContractModel::OnSubmit : seat = " + fcm.getSeat());
+                LOG.trace("FormContractModel::OnSubmit : suit = " + fcm.getSuit());
+                LOG.trace("FormContractModel::OnSubmit : penalty = " + fcm.getPenalty());
+                LOG.trace("FormContractModel::OnSubmit : level = " + fcm.getLevel());
+                LOG.trace("FormContractModel::OnSubmit : tricks = " + fcm.getTricks());
 
                 LOG.info(fcm);
 
