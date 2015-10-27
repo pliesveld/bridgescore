@@ -21,7 +21,7 @@ import java.io.Serializable;
  * Displays history of past games
  */
 
-public class ScorePanel extends Panel
+public class ScorePanel extends BasePanel
 {
 
     ScorePanel(String id)
@@ -34,9 +34,11 @@ public class ScorePanel extends Panel
         Label score1_vulnerbale = new LabelVulnerable("score_team1_vulnerable",new PropertyModel<>(bridgeGame,"team1vuln"));
         Label score2_vulnerbale = new LabelVulnerable("score_team2_vulnerable",new PropertyModel<>(bridgeGame,"team2vuln"));
 
-
-
-        //score1_vulnerbale.add(new SimpleAttributeModifier)
+        /*
+                Use attribute modifier to add modify class tag
+                for displaying vulnerability status
+                score1_vulnerbale.add(new SimpleAttributeModifier)
+         */
 
         add(score1_vulnerbale);
         add(score2_vulnerbale);

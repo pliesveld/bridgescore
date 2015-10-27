@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import pliesveld.bridge.model.*;
 
 
-
 /**
  *
  * Application object for your web application.

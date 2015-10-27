@@ -18,7 +18,7 @@ import java.util.List;
  * Displays history of past games
  */
 
-public class RubberPanel extends Panel
+public class RubberPanel extends BasePanel
 {
 
 
