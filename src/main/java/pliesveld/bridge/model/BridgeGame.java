@@ -13,14 +13,14 @@ public class BridgeGame
     implements Serializable
 {
 	private Seat dealer = Seat.SOUTH;
-	private List<BridgeHand> handHistory = new LinkedList<>();
+	private List<BridgeHand> handHistory = new LinkedList<BridgeHand>();
     private BackScore backScore = new BackScore();
     private boolean team1vuln;
     private boolean team2vuln;
 
     public void playHand(AuctionContract contract, int tricks)
     {
-        ((LinkedList)handHistory).addFirst(new BridgeHand(contract, tricks));
+        handHistory.add(0,new BridgeHand(contract, tricks));
         backScore.evaluateDeclarerPlay(contract, tricks);
         dealer = dealer.next();
         team1vuln = backScore.isVulnerable(Team.TEAM_NS);
