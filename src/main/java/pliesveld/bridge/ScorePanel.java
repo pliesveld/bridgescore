@@ -1,8 +1,12 @@
 package pliesveld.bridge;
 
 
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.ClassAttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.model.IModel;
 
 import org.apache.wicket.markup.html.basic.Label;
@@ -10,11 +14,14 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.util.time.Duration;
 import pliesveld.bridge.model.BackScore;
 import pliesveld.bridge.model.BridgeGame;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
@@ -64,8 +71,8 @@ public class ScorePanel extends BasePanel
         label sets the visibility based on the model
         it contains through the onConfigure overload.
 
-        see: http://wicketinaction.com/2011/11/implement-wicket-component-visibility-changes-properly/
-
+        adds to class tag "vulnerable" when underlying model is true.
+        modifies markup to return string "vulnerable" when true
      */
     class LabelVulnerable extends Label
     {
@@ -78,6 +85,17 @@ public class ScorePanel extends BasePanel
         }
 
         @Override
+        public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
+            boolean obj = (boolean) getDefaultModelObject();
+            if(obj)
+            {
+                replaceComponentTagBody(markupStream,openTag,"Vulnerable");
+            } else {
+                replaceComponentTagBody(markupStream,openTag,"Not Vulnerable");
+            }
+        }
+
+        @Override
         protected void onConfigure() {
             super.onConfigure();
 
@@ -86,6 +104,19 @@ public class ScorePanel extends BasePanel
             boolean isVuln = Boolean.valueOf(obj);
             this.setVisible(isVuln);
         };
+
+        @Override
+        protected void onComponentTag(ComponentTag tag) {
+            super.onComponentTag(tag);
+            boolean obj = (boolean) getDefaultModelObject();
+            if(obj)
+            {
+                tag.put("class","vulnerable");
+            } else {
+                tag.put("class","not-vulnerable");
+            }
+        }
+
 
     }
 }
