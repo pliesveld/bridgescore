@@ -16,6 +16,10 @@ To update a jquery mobile radio ui
 $("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 */
 
+/*
+    Updates lower slider when the contract level has been input by the user.
+*/
+
 ($(document).on("ready", function() {
 
     $(document).on("change", "#contract_level", function()
@@ -32,18 +36,12 @@ $("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 
 }));
 
+/* Updates description of hand result;  MADE | SET */
 ($(document).on("ready", function() {
 $(document).on("change", "#tricks_taken", function()
 {
     var tricks = parseInt($('#tricks_taken').val());
     var level = parseInt($('#contract_level').val());
-
-    if(level == 6)
-    {
-        $('span#contract_result').html("");
-        $('span#contract_result_by').html("");
-        return;
-    }
 
     var cmp = tricks - (level + 6);
 
