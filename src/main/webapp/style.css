@@ -32,6 +32,11 @@ div#score-container .ui-grid-solo > :first-child
 	font-size: 24pt;
 }
 
+#rubber-container ul.container-mark-list span.score-detail
+{
+    text-align: right;
+}
+
 .vulnerable
 {
     font-style: italic;

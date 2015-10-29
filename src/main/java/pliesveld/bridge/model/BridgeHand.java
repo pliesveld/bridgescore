@@ -2,12 +2,14 @@
 package pliesveld.bridge.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class BridgeHand 
     implements Serializable
 {
     private AuctionContract contract;
     private int tricks;
+    private List<ScoreMarkEntry> marks;
 
     BridgeHand(AuctionContract contract, int tricks)
     {
@@ -29,6 +31,14 @@ public class BridgeHand
 
     public void setTricks(int tricks) {
         this.tricks = tricks;
+    }
+
+    public List<ScoreMarkEntry> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(List<ScoreMarkEntry> marks) {
+        this.marks = marks;
     }
 
     @Override

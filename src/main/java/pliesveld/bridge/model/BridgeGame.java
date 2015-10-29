@@ -1,8 +1,6 @@
 // vim: tabstop=4 shiftwidth=4 expandtab
 package pliesveld.bridge.model;
 
-import org.apache.wicket.markup.html.link.Link;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,13 +13,16 @@ public class BridgeGame
 	private Seat dealer = Seat.SOUTH;
 	private List<BridgeHand> handHistory = new LinkedList<BridgeHand>();
     private BackScore backScore = new BackScore();
-    private boolean team1vuln;
-    private boolean team2vuln;
+    private boolean team1vuln = false;
+    private boolean team2vuln = false;
 
     public void playHand(AuctionContract contract, int tricks)
     {
-        handHistory.add(0,new BridgeHand(contract, tricks));
-        backScore.evaluateDeclarerPlay(contract, tricks);
+        BridgeHand bh = new BridgeHand(contract,tricks);
+
+        List<ScoreMarkEntry> marksList = backScore.evaluateDeclarerPlay(contract, tricks);
+        bh.setMarks(marksList);
+        handHistory.add(0,bh);
         dealer = dealer.next();
         team1vuln = backScore.isVulnerable(Team.TEAM_NS);
         team2vuln = backScore.isVulnerable(Team.TEAM_WE);

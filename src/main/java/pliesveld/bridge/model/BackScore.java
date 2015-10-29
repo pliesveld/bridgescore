@@ -4,6 +4,8 @@ package pliesveld.bridge.model;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.lang.StringBuilder;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Maintains the running score of the bridge game.
@@ -31,7 +33,16 @@ public class BackScore implements Serializable
         return vulnerable.contains(team);
     }
 
-    public void evaluateDeclarerPlay(AuctionContract contract, int tricks_taken_by_declarer)
+    public static class ScoreMarksList extends LinkedList<ScoreMarkEntry>
+    {
+        void add(Team team, ScoreMark mark, int points)
+        {
+            ScoreMarkEntry new_entry = new ScoreMarkEntry(team,mark,points);
+            add(new_entry);
+        }
+    }
+
+    public List<ScoreMarkEntry> evaluateDeclarerPlay(AuctionContract contract, int tricks_taken_by_declarer)
     {
         Team declarer_team = contract.getDeclarer().team();
         Penalty penalty = contract.getPenalty();
@@ -41,6 +52,8 @@ public class BackScore implements Serializable
         int made = tricks_taken_by_declarer - expected;
 
         boolean vulnerable = isVulnerable(declarer_team);
+
+        ScoreMarksList scoreMarksList = new ScoreMarksList();
 
         if( made < 0 )
         { // Set by abs(made) under-tricks
@@ -75,7 +88,8 @@ public class BackScore implements Serializable
             }
 
             points_bonus += undertricks*undertrick_multiplier;
-            add(declarer_team.other(),0,points_bonus);
+            add(declarer_team.other(),0,points_bonus,scoreMarksList);
+            scoreMarksList.add(declarer_team.other(),ScoreMark.SET.UNDER_TRICKS,points_bonus);
         } else { // Contract + made over-tricks
 
             int points_below = 0;
@@ -109,6 +123,7 @@ public class BackScore implements Serializable
                         overtrick_multiplier += 100;
                 case DOUBLED:
                     points_bonus += 50;
+                    scoreMarksList.add(declarer_team,ScoreMark.BONUS.INSULT,50);
                     points_below *= 2;
                     overtrick_multiplier += 100;
                     if(vulnerable)
@@ -119,30 +134,45 @@ public class BackScore implements Serializable
                     break;
             }
 
+            scoreMarksList.add(declarer_team,ScoreMark.MADE.BID_AND_MADE,points_below);
             /* over tricks */
             points_bonus += made*overtrick_multiplier;
+
+            if(made > 0)
+            {
+                scoreMarksList.add(declarer_team,ScoreMark.MADE.OVER_TRICKS,made*overtrick_multiplier);
+            }
 
             /* small slam */
             if(level == 6)
             {
+                int small_slam_pts = 0;
                 if(!vulnerable)
                 {
-                    points_bonus += 500;
+                    small_slam_pts = 500;
                 } else {
-                    points_bonus += 750;
+                    small_slam_pts = 750;
+
                 }
+                scoreMarksList.add(declarer_team,ScoreMark.SLAM.SLAM_SMALL,small_slam_pts);
+                points_bonus += small_slam_pts;
             } else if(level == 7) {
                 /* grand slam */
+
+                int grand_slam_pts = 0;
                 if(!vulnerable)
                 {
-                    points_bonus += 1000;
+                    grand_slam_pts = 1000;
                 } else {
-                    points_bonus += 1500;
+                    grand_slam_pts = 1500;
                 }
+                scoreMarksList.add(declarer_team,ScoreMark.SLAM.SLAM_GRAND,grand_slam_pts);
+                points_bonus += grand_slam_pts;
             }
 
-            add(declarer_team,points_below,points_bonus);
+            add(declarer_team,points_below,points_bonus,scoreMarksList);
         }
+        return scoreMarksList;
     }
 
     public void clear() {
@@ -219,7 +249,7 @@ public class BackScore implements Serializable
         }
     }
 
-    private void add(Team team, int points_below, int points_above)
+    private void add(Team team, int points_below, int points_above, ScoreMarksList scoreMarksList)
     {
         points_above_line[team.ordinal()] += points_above;
         points_above_line[team.ordinal()] += points_below;
@@ -236,6 +266,9 @@ public class BackScore implements Serializable
                 //won rubber in 2
                 if(!vulnerable.contains(team.other()))
                     rubber_points = 700;
+
+
+                scoreMarksList.add(team,ScoreMark.RUBBER.RUBBER_WIN,rubber_points);
 
                 points_above_line[winner.ordinal()] += rubber_points;
                 vulnerable.clear();
@@ -286,12 +319,5 @@ public class BackScore implements Serializable
         sb.append("]");
 
         return sb.toString();
-    }
-
-    private class ScoreMark
-    {
-        private int points_above;
-        private int points_below;
-        private Team team_awarded;
     }
 }

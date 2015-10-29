@@ -1,10 +1,13 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-<div data-role="main" class="ui-content">
+<div id="rubber-container" data-role="main" class="ui-content">
     <div data-role="collapsible" data-collapsed="true" data-icon data-iconpos="right" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u" data-mini="true">
     <h2>History</h2>
-    <ul wicket:id="hand_list" data-role="listview">
+    <ul wicket:id="hand_list" data-role="listview" class="container-mark-list">
         <li>
-            <span wicket:id="hand"></span>
+            <wicket:container wicket:id="container-score-mark">
+                <span wicket:id="hand"></span>
+                <span class="score-detail" wicket:id="score-breakdown"></span>
+            </wicket:container>
         </li>
     </ul>
     </div>
