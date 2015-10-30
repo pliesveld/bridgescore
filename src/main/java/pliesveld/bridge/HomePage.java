@@ -3,11 +3,14 @@ package pliesveld.bridge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.wicket.Session;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.ClientProperties;
 import org.apache.wicket.protocol.http.request.WebClientInfo;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -75,6 +78,24 @@ public class HomePage extends WebPage {
 
         final ClientProperties properties =  ((WebClientInfo)Session.get().getClientInfo()).getProperties();
         add(new MultiLineLabel("clientinfo",properties.toString()));
+
+        add(new Label("render-count", new IModel<Object>() {
+            @Override
+            public Object getObject() {
+                return getPage().getRenderCount();
+            }
+
+            @Override
+            public void setObject(Object object) {
+
+            }
+
+            @Override
+            public void detach() {
+
+            }
+        }
+        ));
 
 
         add(new FeedbackPanel("feedback"));
