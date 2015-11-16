@@ -3,6 +3,8 @@ package pliesveld.bridge;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.resource.UrlResourceReference;
+import org.apache.wicket.request.Url;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pliesveld.bridge.model.*;
@@ -41,5 +43,6 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
         getDebugSettings().setAjaxDebugModeEnabled(false);
+        getJavaScriptLibrarySettings().setJQueryReference(new UrlResourceReference(Url.parse("/vendors/jquery-2.1.4.min.js")));
 	}
 }
