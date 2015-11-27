@@ -62,17 +62,19 @@ fieldset > select
     padding: 10px 3px 10px;
 }
 
+/*
 label > input {
-	visibility: hidden; /* Makes input not-clickable */
-	position: absolute; /* Remove input from document flow */
+	visibility: hidden; // Makes input not-clickable 
+	position: absolute; // Remove input from document flow 
 }
 
-label > input + span {      /* SPAN STYLES FOR CARD SUITS */
+label > input + span {      // SPAN STYLES FOR CARD SUITS
 	cursor:pointer;
 	border:2px solid transparent;
 	font-size:52pt;
 }
 
-label > input:checked + span { /* (RADIO CHECKED) SPAN STYLES */
+label > input:checked + span { // (RADIO CHECKED) SPAN STYLES
 	border: 2px solid #f00; 
 }
+*/

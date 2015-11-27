@@ -1,22 +1,53 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
 <div data-role="main" class="ui-content">
     <form wicket:id="auctionForm" id="auctionForm" data-ajax="false">
-    <div class="ui-fieldcontain ui-hide-label">
-        <fieldset class="auction" data-role="controlgroup">
-            <select wicket:id='seat' data-overlay-theme="e"></select>
+    <div class="ui-fieldcontain">
+
+        <fieldset class="auction" data-role="controlgroup" data-type="horizontal"  data-theme="b">
+            <span wicket:id="seat">
+                <label for="radio-choice-seat-south">South</label>
+                <label for="radio-choice-seat-west">West</label>
+                <label for="radio-choice-seat-north">North</label>
+                <label for="radio-choice-seat-east">East</label>
+
+                <input type="radio" value="SOUTH" id="radio-choice-seat-south">
+                <input type="radio" value="WEST" id="radio-choice-seat-west">
+                <input type="radio" value="NORTH" id="radio-choice-seat-north">
+                <input type="radio" value="EAST" id="radio-choice-seat-east">
+            </span>
+        </fieldset>
+
+        <fieldset class="auction" data-role="controlgroup" data-type="horizontal" data-theme="b">
+            <span wicket:id="suit">
+                <label for="radio-choice-suit-first">&#x2663;</label>
+                <label for="radio-choice-suit-second">&#x2666;</label>
+                <label for="radio-choice-suit-third">&#x2665;</label>
+                <label for="radio-choice-suit-fourth">&#x2660;</label>
+                <label for="radio-choice-suit-fifth">NT</label>
+
+               <input type="radio" value="CLUBS" id="radio-choice-suit-first">
+               <input type="radio" value="DIAMONDS" id="radio-choice-suit-second">
+               <input type="radio" value="HEARTS" id="radio-choice-suit-third">
+               <input type="radio" value="SPADES" id="radio-choice-suit-fourth">
+               <input type="radio" value="NOTRUMP" id="radio-choice-suit-fifth">
+            </span>
         </fieldset>
 
         <fieldset class="auction" data-role="controlgroup">
-            <select wicket:id='suit' data-overlay-theme="e"></select>
-        </fieldset>
-
-        <fieldset class="auction" data-role="controlgroup">
-            <legend>Contract Level:</legend>
+            <!-- <legend>Contract Level:</legend>-->
             <input type="range" wicket:id="level" id="contract_level" name="contract_level" min="1" max="7" value="1" data-role="slider" required/>
         </fieldset>
 
-        <fieldset class="auction" data-role="controlgroup">
-            <select wicket:id='penalty' data-overlay-theme="e"></select>
+        <fieldset class="auction" data-role="controlgroup" data-type="horizontal" data-theme="b">
+            <!-- <legend>Penalty:</legend> -->
+            <span wicket:id="penalty">
+               <input type="radio" value="UNDOUBLED" id="radio-choice-penalty-first" checked="checked">
+               <label for="radio-choice-penalty-first">Undoubled</label>
+               <input type="radio" value="DOUBLED" id="radio-choice-penalty-second">
+               <label for="radio-choice-penalty-second">Doubled</label>
+               <input type="radio" value="REDOUBLED" id="radio-choice-penalty-third">
+               <label for="radio-choice-penalty-third">Re-Doubled</label>
+            </span>
         </fieldset>
 
         <ul data-role="listview" data-inset="true">
@@ -25,11 +56,12 @@
         </ul>
 
         <fieldset class="auction tricks" data-role="controlgroup">
-            <legend>Ticks Taken by Declarer:</legend>
+            <!-- <legend>Ticks Taken by Declarer:</legend> -->
             <input type="range" wicket:id="tricks" id="tricks_taken" name="tricks" min="0" max="13" value="7" data-role="slider" required />
         </fieldset>
 
     </div>
+
 </form>
 </div>
 </wicket:panel>
