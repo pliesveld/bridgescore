@@ -45,6 +45,8 @@ public class BridgeGame
         dealer = Seat.SOUTH;
         handHistory.clear();
         backScore.clear();
+        team1vuln = false;
+        team2vuln = false;
     }
 
     /* removes last game from history
