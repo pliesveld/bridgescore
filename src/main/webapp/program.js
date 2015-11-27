@@ -65,3 +65,13 @@ $(document).on("change", "#tricks_taken", function()
 
 });
 }));
+
+
+/* header button submits auctionForm */
+($(document).on("ready", function () {
+     $('#page2-submit').click(function() {
+            $('#auctionForm').submit();
+     });
+ }));
+
+

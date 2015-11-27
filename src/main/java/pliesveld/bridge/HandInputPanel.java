@@ -4,6 +4,7 @@ package pliesveld.bridge;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.form.EnumChoiceRenderer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RangeTextField;
@@ -23,12 +24,6 @@ public class HandInputPanel extends BasePanel {
     {
         private FormContractModel _formContractModel = new FormContractModel();
 
-        private DropDownChoice<Seat> choiceSeatField;
-        private DropDownChoice<Suit> choiceSuitField;
-        private DropDownChoice<Penalty> choicePenaltyField;
-        private RangeTextField<Integer> rangeLevelField;
-        private RangeTextField<Integer> rangeTricksField;
-
         public ContractForm(final String id)
         {
             super(id);
@@ -41,27 +36,25 @@ public class HandInputPanel extends BasePanel {
 
             setMarkupId("auctionForm");
 
-            add(choiceSeatField = new DropDownChoice<Seat>("seat",
-                    Arrays.asList(Seat.values()),
-                    new EnumChoiceRenderer<Seat>(this)));
-            choiceSeatField.setRequired(true);
+            final RadioChoice choiceSeat = new RadioChoice("seat", Arrays.asList(Seat.values()));
+            choiceSeat.setRequired(true);
+            add(choiceSeat);
 
-            add((choiceSuitField = new DropDownChoice<Suit>("suit",
-                    Arrays.asList(Suit.values()),
-                    new EnumChoiceRenderer<Suit>(this))));
-            choiceSuitField.setRequired(true);
 
-            add((choicePenaltyField = new DropDownChoice<Penalty>("penalty",
-                    Arrays.asList(Penalty.values()),
-                    new EnumChoiceRenderer<Penalty>(this))));
-            choicePenaltyField.setRequired(true);
+            final RadioChoice choiceSuit = new RadioChoice("suit",Arrays.asList(Suit.values()));
+            choiceSuit.setRequired(true);
+            add(choiceSuit);
 
-            rangeLevelField = new RangeTextField<Integer>("level");
+            final RadioChoice choicePenalty = new RadioChoice("penalty",Arrays.asList(Penalty.values()));
+            choicePenalty.setRequired(true);
+            add(choicePenalty);
+
+            final RangeTextField<Integer> rangeLevelField = new RangeTextField<Integer>("level");
             rangeLevelField.setMinimum(1);
             rangeLevelField.setMaximum(7);
             add(rangeLevelField);
 
-            rangeTricksField = new RangeTextField<Integer>("tricks");
+            final RangeTextField<Integer> rangeTricksField = new RangeTextField<Integer>("tricks");
             rangeTricksField.setMinimum(0);
             rangeTricksField.setMaximum(13);
             add(rangeTricksField);
