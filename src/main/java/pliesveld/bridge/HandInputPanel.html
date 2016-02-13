@@ -1,67 +1,137 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-<div data-role="main" class="ui-content">
-    <form wicket:id="auctionForm" id="auctionForm" data-ajax="false">
-    <div class="ui-fieldcontain">
+<div class="not-last-page" data-role="page" id="hand-page-seat" date-title="Hand Record">
+    <div data-role="header">
+        <a href="#page1" data-icon="back" data-transition="slide" data-direction="reverse">back</a>
+        <h1>Select Declarer</h1>
+        <div id="hand-page-seat-submit" data-role="button" data-icon="carat-r" data-transition="slide" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-carat-r">next</div>
+    </div>
 
-        <fieldset class="auction" data-role="controlgroup" data-type="horizontal"  data-theme="b">
-            <span wicket:id="seat">
-                <label for="radio-choice-seat-south">South</label>
-                <label for="radio-choice-seat-west">West</label>
-                <label for="radio-choice-seat-north">North</label>
-                <label for="radio-choice-seat-east">East</label>
+    <form id="form-hand-seat" onsubmit="return hand_seat_submit();">
+        <div class="ui-fieldcontain">
+            <fieldset class="auction" data-role="controlgroup" data-type="horizontal"  data-theme="b">
+                <span>
+                    <label for="radio-choice-seat-south">South</label>
+                    <label for="radio-choice-seat-west">West</label>
+                    <label for="radio-choice-seat-north">North</label>
+                    <label for="radio-choice-seat-east">East</label>
 
-                <input type="radio" value="SOUTH" id="radio-choice-seat-south">
-                <input type="radio" value="WEST" id="radio-choice-seat-west">
-                <input type="radio" value="NORTH" id="radio-choice-seat-north">
-                <input type="radio" value="EAST" id="radio-choice-seat-east">
-            </span>
-        </fieldset>
+                    <input type="radio" name="seat" value="SOUTH" id="radio-choice-seat-south">
+                    <input type="radio" name="seat" value="WEST" id="radio-choice-seat-west">
+                    <input type="radio" name="seat" value="NORTH" id="radio-choice-seat-north">
+                    <input type="radio" name="seat" value="EAST" id="radio-choice-seat-east">
+                </span>
+            </fieldset>
+         </div>
+    </form>
+</div>
 
+
+<div class="not-last-page" data-role="page" id="hand-page-suit" date-title="Hand Record">
+    <div data-role="header">
+        <a href="#hand-page-seat" data-icon="back" data-transition="slide" data-direction="reverse">back</a>
+        <h1>Select Suit</h1>
+        <div id="hand-page-suit-submit" data-role="button" data-icon="carat-r" data-transition="slide" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-carat-r">next</div>
+    </div>
+
+    <form id="form-hand-suit" onsubmit="return hand_suit_submit();">
         <fieldset class="auction" data-role="controlgroup" data-type="horizontal" data-theme="b">
-            <span wicket:id="suit">
+            <span>
                 <label for="radio-choice-suit-first">&#x2663;</label>
                 <label for="radio-choice-suit-second">&#x2666;</label>
                 <label for="radio-choice-suit-third">&#x2665;</label>
                 <label for="radio-choice-suit-fourth">&#x2660;</label>
                 <label for="radio-choice-suit-fifth">NT</label>
 
-               <input type="radio" value="CLUBS" id="radio-choice-suit-first">
-               <input type="radio" value="DIAMONDS" id="radio-choice-suit-second">
-               <input type="radio" value="HEARTS" id="radio-choice-suit-third">
-               <input type="radio" value="SPADES" id="radio-choice-suit-fourth">
-               <input type="radio" value="NOTRUMP" id="radio-choice-suit-fifth">
+               <input type="radio" name="suit" value="CLUBS" id="radio-choice-suit-first">
+               <input type="radio" name="suit" value="DIAMONDS" id="radio-choice-suit-second">
+               <input type="radio" name="suit" value="HEARTS" id="radio-choice-suit-third">
+               <input type="radio" name="suit" value="SPADES" id="radio-choice-suit-fourth">
+               <input type="radio" name="suit" value="NOTRUMP" id="radio-choice-suit-fifth">
             </span>
         </fieldset>
+    </form>
+</div>
 
+
+<div class="not-last-page" data-role="page" id="hand-page-level" date-title="Hand Record">
+    <div data-role="header">
+        <a href="#hand-page-suit" data-icon="back" data-transition="slide" data-direction="reverse">back</a>
+        <h1>Select level</h1>
+        <div id="hand-page-level-submit" data-role="button" data-icon="carat-r" data-transition="slide" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-carat-r">next</div>
+    </div>
+
+    <form id="form-hand-level" onsubmit="return hand_level_submit();">
         <fieldset class="auction" data-role="controlgroup">
-            <!-- <legend>Contract Level:</legend>-->
-            <input type="range" wicket:id="level" id="contract_level" name="contract_level" min="1" max="7" value="1" data-role="slider" required/>
+            <input type="range" id="contract_level" min="1" max="7" value="1" data-role="slider" required/>
         </fieldset>
+    </form>
+</div>
 
+
+<div class="not-last-page" data-role="page" id="hand-page-penalty" date-title="Hand Record">
+    <div data-role="header">
+        <a href="#hand-page-level" data-icon="back" data-transition="slide" data-direction="reverse">back</a>
+        <h1>Select penalty</h1>
+        <div id="hand-page-penalty-submit" data-role="button" data-icon="carat-r" data-transition="slide" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-carat-r">next</div>
+    </div>
+
+    <form id="form-hand-penalty" onsubmit="return hand_penalty_submit();">
         <fieldset class="auction" data-role="controlgroup" data-type="horizontal" data-theme="b">
-            <!-- <legend>Penalty:</legend> -->
-            <span wicket:id="penalty">
-               <input type="radio" value="UNDOUBLED" id="radio-choice-penalty-first" checked="checked">
+            <span>
                <label for="radio-choice-penalty-first">Undoubled</label>
-               <input type="radio" value="DOUBLED" id="radio-choice-penalty-second">
                <label for="radio-choice-penalty-second">Doubled</label>
-               <input type="radio" value="REDOUBLED" id="radio-choice-penalty-third">
                <label for="radio-choice-penalty-third">Re-Doubled</label>
+
+               <input type="radio" name="penalty" value="UNDOUBLED" id="radio-choice-penalty-first" checked="checked">
+               <input type="radio" name="penalty" value="DOUBLED" id="radio-choice-penalty-second">
+               <input type="radio" name="penalty" value="REDOUBLED" id="radio-choice-penalty-third">
             </span>
         </fieldset>
+    </form>
+</div>
 
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider"><span id="contract_result"></span></li>
-            <li><span id="contract_result_by"></span></li>
-        </ul>
 
+
+<div class="last-page" data-role="page" id="hand-page-final" date-title="Hand Record">
+    <div data-role="header">
+        <a href="#hand-page-penalty" data-icon="back" data-transition="slide" data-direction="reverse">back</a>
+        <h1>Play Result</h1>
+        <div id="hand-page-final-submit" data-role="button" data-icon="check" data-transition="pop" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check">Submit</div>
+
+    </div>
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider"><span id="contract_result"></span></li>
+        <li><span id="contract_result_by"></span></li>
+    </ul>
+
+    <form wicket:id="auctionForm" id="auctionForm" data-ajax='false'>
+
+       
+        <div wicket:id="seat">
+            <input class="hidden" type="radio"/>
+        </div>
+        
+        <div wicket:id="suit">
+            <input class="hidden" type="number" name='suit'/>
+        </div>
+        
+        <input class="hidden" type="range" wicket:id="level" id="contract_level" name="contract_level" min="1" max="7" value="1" data-role="slider" required/>
+        
+        <div wicket:id="penalty">
+            <input class="hidden" type="number" name='penalty'/>
+        </div>
+    
         <fieldset class="auction tricks" data-role="controlgroup">
-            <!-- <legend>Ticks Taken by Declarer:</legend> -->
             <input type="range" wicket:id="tricks" id="tricks_taken" name="tricks" min="0" max="13" value="7" data-role="slider" required />
         </fieldset>
 
-    </div>
+        <div id="feedbackPanel"><span wicket:id="feedback"/></div>
+    </form>
 
-</form>
+
 </div>
+
+
+
+
 </wicket:panel>

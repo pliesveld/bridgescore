@@ -12,15 +12,16 @@
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="vendors/jquery.mobile.structure-1.4.5.min.css" />
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
-    <script src="program.js"></script>
     <script src="vendors/jquery.mobile-1.4.5.min.js"></script>
+    <script src="program.js"></script>
+    
 
 </head>
 
 
 <body>
 <div data-role="page" id="page1" data-title="Display Game">
-    <div data-role="header"><h1>Bridge Score</h1><a href="#page2" data-icon="plus" data-transition="pop">add</a></div>
+    <div data-role="header"><h1>Bridge Score</h1><a href="#hand-page-seat" data-icon="plus" data-transition="slide">add</a></div>
 
     <div wicket:id="score-panel" id="score-panel" class="score">##score panel##</div>
     <div wicket:id="rubber-panel" id="rubber-panel" class="rubber">##rubber panel##</div>
@@ -31,17 +32,7 @@
     </div>
 </div>
 
-<div data-role="page" id="page2" date-title="Hand Record">
-    <div data-role="header">
-        <a href="#page1" data-icon="back" data-transition="pop" data-direction="reverse">back</a>
-        <h1>Record Hand Play</h1>
-        <div id="page2-submit" data-role="button" data-icon="check" data-transition="pop" data-direction="reverse" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all">Submit</div>
-    </div>
-
-    <div wicket:id="hand-input-panel" class="form auction"></div>
-
-    <div id="feedbackPanel"><span wicket:id="feedback"/></div>
-</div>
+<div wicket:id="hand-input-panel" class="form auction"></div>
 
 <div data-role="page" id="page3" date-title="Settings">
     <div data-role="header"><h1>Settings</h1></div>

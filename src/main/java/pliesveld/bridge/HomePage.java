@@ -8,7 +8,6 @@ import org.apache.wicket.markup.html.basic.MultiLineLabel;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.ClientProperties;
@@ -23,6 +22,8 @@ public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
     private static final Logger LOG = LogManager.getLogger();
 
+    private boolean stripTags;
+
     protected HandInputPanel panelForm;
     protected ScorePanel panelScore;
     protected RubberPanel panelRubber;
@@ -33,9 +34,14 @@ public class HomePage extends WebPage {
     public HomePage(final PageParameters parameters) {
 		super(parameters);
 
+        stripTags = ((WicketApplication)getApplication()).getMarkupSettings().getStripWicketTags();
+
         bridgeGame = ((WicketApplication)getApplication()).getGame();
 
-        add((panelForm = new HandInputPanel("hand-input-panel")));
+        panelForm = new HandInputPanel("hand-input-panel");
+        panelForm.setRenderBodyOnly(true);
+
+        add(panelForm);
         add((panelRubber = new RubberPanel("rubber-panel")));
         add((panelScore = new ScorePanel("score-panel")));
 
@@ -98,9 +104,20 @@ public class HomePage extends WebPage {
         ));
 
 
-        add(new FeedbackPanel("feedback"));
-
         setVersioned(false);
-
     }
+
+
+	@Override
+	protected void onBeforeRender() {
+		super.onBeforeRender();
+		((WicketApplication)getApplication()).getMarkupSettings().setStripWicketTags(true);
+	}
+
+	@Override
+	protected void onAfterRender() {
+		super.onAfterRender();
+		((WicketApplication)getApplication()).getMarkupSettings().setStripWicketTags(stripTags);
+	}
+
 }
