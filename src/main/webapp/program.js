@@ -1,4 +1,3 @@
-
 /*
 To update a jquery mobile slider ui
 
@@ -47,12 +46,12 @@ $("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 ($(document).on("ready", function() {
 $(document).on("change", "#real_tricksid", function()
 {
-    let tricks = parseInt($('#real_tricksid').val());
-    let level = parseInt($('#real_levelid').val());
+    var tricks = parseInt($('#real_tricksid').val());
+    var level = parseInt($('#real_levelid').val());
 
-    let cmp = tricks - (level + 6);
+    var cmp = tricks - (level + 6);
 
-    let adverb = "";
+    var adverb = "";
     if(cmp < 0)
     {
         adverb = "Down ";
@@ -90,6 +89,7 @@ function print_form_values()
 
          
      $('#hand-page-seat-submit').click(function() {
+     		console.log("seat submit clicked");
             $('#form-hand-seat').submit();
      });
      
@@ -117,7 +117,7 @@ function print_form_values()
 
 function test_fill()
 {
-     $("input[type='radio']").attr("checked",false).checkboxradio("refresh"); 
+    $("input[type='radio']").attr("checked",false).checkboxradio("refresh"); 
     $("input[type='radio']:last").attr("checked",true).checkboxradio("refresh");
     //$("input[type='radio']").checkboxradio("refresh");
 
@@ -128,12 +128,12 @@ function test_fill()
 
 function hand_seat_submit()
 {
-    let selected = $('#form-hand-seat input[type="radio"]:checked');
+    var selected = $('#form-hand-seat input[type="radio"]:checked');
     console.log(selected[0]);
     
     if(typeof selected[0] !== "undefined")
     { 
-        let idx = -1;
+        var idx = -1;
         switch(selected.attr('value'))
         {
             case 'SOUTH':
@@ -162,12 +162,12 @@ function hand_seat_submit()
 
 function hand_suit_submit()
 {
-    let selected = $('#form-hand-suit input[type="radio"]:checked');
+    var selected = $('#form-hand-suit input[type="radio"]:checked');
     console.log(selected[0]);
     
     if(typeof selected[0] !== "undefined")
     { 
-        let idx = -1;
+        var idx = -1;
         switch(selected.attr('value'))
         {
             case 'CLUBS':
@@ -199,10 +199,10 @@ function hand_suit_submit()
 
 function hand_level_submit()
 {
-    let selected = $('#form-hand-level input[type="number"]').val();
+    var selected = $('#form-hand-level input[type="number"]').val();
     console.log(selected);
 
-    let num = parseInt(selected);
+    var num = parseInt(selected);
 
     $('#real_levelid').val(num).slider("refresh");
     $('#real_tricksid').val(num + 6).slider("refresh");
@@ -214,13 +214,13 @@ function hand_level_submit()
 
 function hand_penalty_submit()
 {
-    let selected = $('#form-hand-penalty input[type="radio"]:checked');
+    var selected = $('#form-hand-penalty input[type="radio"]:checked');
     console.log(selected[0]);
     
     if(typeof selected[0] !== "undefined")
     { 
     
-        let idx = -1;
+        var idx = -1;
         switch(selected.attr('value'))
         {
             case 'UNDOUBLED':
