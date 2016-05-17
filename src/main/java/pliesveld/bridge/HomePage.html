@@ -21,12 +21,12 @@
 
 <body>
 <div data-role="page" id="page1" data-title="Display Game">
-    <div data-role="header"><h1>Bridge Score</h1><a href="#hand-page-seat" data-icon="plus" data-transition="slide">add</a></div>
+    <div data-role="header" class="ui-bar"><h1>Bridge Score</h1><a href="#hand-page-seat" data-icon="plus" data-transition="slide">add</a></div>
 
     <div wicket:id="score-panel" id="score-panel" class="score">##score panel##</div>
     <div wicket:id="rubber-panel" id="rubber-panel" class="rubber">##rubber panel##</div>
 
-    <div data-role="footer" >
+    <div data-role="footer" class="ui-bar" data-position="fixed">
         <a href="#page1" wicket:id="link-refresh" data-icon="refresh">refresh</a>
         <a href="#page3" data-icon="lock">settings</a>
     </div>
@@ -50,7 +50,7 @@
         </ul>
     </div>
 
-    <div data-role="footer" class="ui-bar">
+    <div data-role="footer" class="ui-bar" data-position="fixed">
         <a href="#page1" data-icon="recycle">return</a>
     </div>
 </div>
