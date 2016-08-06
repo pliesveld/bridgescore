@@ -72,6 +72,29 @@ fieldset > select
     position: absolute;
 }
 
+.ui-block-a, .ui-block-b, .ui-block-c {
+//    background-color: lightgray;
+//    border: 1px solid black;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+
+
+.ui-block-solo .ui-block-a {
+    margin: 10px;
+}
+
+#contract_result,
+#contract_result_by {
+    padding: 1px;
+}
+
+#contract_container {
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
 
 /*
 label > input {

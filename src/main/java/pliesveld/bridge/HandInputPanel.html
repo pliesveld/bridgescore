@@ -65,6 +65,12 @@
             <input type="range" id="contract_level" min="1" max="7" value="1" data-role="slider" required/>
         </fieldset>
     </form>
+
+    <div class="ui-grid-b">
+        <div class="ui-block-a"><button class="ui-btn ui-shadow ui-corner-all" id="contract-level-dec">-</button></div>
+        <div class="ui-block-b"></div>
+        <div class="ui-block-c"><button class="ui-btn ui-shadow ui-corner-all" id="contract-level-inc">+</button></div>
+    </div>
 </div>
 
 
@@ -99,10 +105,15 @@
         <div id="hand-page-final-submit" data-role="button" data-icon="check" data-transition="pop" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check">Submit</div>
 
     </div>
-    <ul data-role="listview" data-inset="true">
-        <li data-role="list-divider"><span id="contract_result"></span></li>
-        <li><span id="contract_result_by"></span></li>
-    </ul>
+
+    <div class="ui-grid-solo" id="contract_container">
+        <div class="ui-block-a">
+            <ul data-role="listview" data-inset="true">
+                <li data-role="list-divider"><span id="contract_result"> </span></li>
+                <li><span id="contract_result_by"> </span></li>
+            </ul>
+        </div>
+    </div>
 
     <form wicket:id="auctionForm" id="auctionForm" data-ajax='false'>
 
@@ -125,9 +136,15 @@
             <input type="range" wicket:id="tricks" id="tricks_taken" name="tricks" min="0" max="13" value="7" data-role="slider" required />
         </fieldset>
 
+
         <div id="feedbackPanel"><span wicket:id="feedback"/></div>
     </form>
 
+    <div class="ui-grid-b">
+        <div class="ui-block-a"><button class="ui-btn ui-shadow ui-corner-all" id="tricks-level-dec">-</button></div>
+        <div class="ui-block-b"></div>
+        <div class="ui-block-c"><button class="ui-btn ui-shadow ui-corner-all" id="tricks-level-inc">+</button></div>
+    </div>
 
 </div>
 

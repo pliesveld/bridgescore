@@ -44,32 +44,74 @@ $("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 
 /* Updates description of hand result;  MADE | SET */
 ($(document).on("ready", function() {
-$(document).on("change", "#real_tricksid", function()
-{
-    var tricks = parseInt($('#real_tricksid').val());
-    var level = parseInt($('#real_levelid').val());
 
-    var cmp = tricks - (level + 6);
+    var updateTrickDesc = function() {
+	var tricks = parseInt($('#real_tricksid').val());
+	var level = parseInt($('#real_levelid').val());
 
-    var adverb = "";
-    if(cmp < 0)
+	var cmp = tricks - (level + 6);
+
+	var adverb = "";
+	if(cmp < 0)
+	{
+	    adverb = "Down ";
+	    $('#contract_result').html("SET");
+
+	    cmp = Math.abs(cmp);
+	} else {
+	    adverb = "+";
+	    $('#contract_result').html("MADE");
+
+	}
+
+	if(cmp !== 0)
+	    $('#contract_result_by').html(adverb + cmp);
+	else
+	    $('#contract_result_by').html("");
+    };
+
+    $(document).on("change", "#real_tricksid", function()
     {
-        adverb = "Down ";
-        $('#contract_result').html("SET");
+	updateTrickDesc();
+    });
 
-        cmp = Math.abs(cmp);
-    } else {
-        adverb = "+";
-        $('#contract_result').html("MADE");
 
-    }
+    $('#contract-level-inc').click(function() {
+	console.log("click");
+	var selected = $('#form-hand-level input[type="number"]').val();
+	var num = parseInt(selected);
+	num = num + 1;
+    	$('#contract_level').val(num).slider("refresh");
+    });
 
-    if(cmp != 0)
-        $('#contract_result_by').html(adverb + cmp);
-    else
-        $('#contract_result_by').html("");
+    $('#contract-level-dec').click(function() {
+	console.log("click");
+	var selected = $('#form-hand-level input[type="number"]').val();
+	var num = parseInt(selected);
+	num = num - 1;
+    	$('#contract_level').val(num).slider("refresh");
+    });
 
-});
+    $('#tricks-level-inc').click(function() {
+	console.log("click");
+	var selected = $('#real_tricksid').val();
+	var num = parseInt(selected);
+	num = num + 1;
+    	$('#real_tricksid').val(num).slider("refresh");
+	updateTrickDesc();
+    });
+
+    $('#tricks-level-dec').click(function() {
+	console.log("click");
+	var selected = $('#real_tricksid').val();
+	var num = parseInt(selected);
+	num = num - 1;
+    	$('#real_tricksid').val(num).slider("refresh");
+	updateTrickDesc();
+    });
+
+
+
 }));
 
 
