@@ -1,9 +1,10 @@
-package pliesveld.bridge;
+package pliesveld.bridge.web;
 
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pliesveld.bridge.WicketApplication;
 import pliesveld.bridge.model.BridgeGame;
 
 /**

@@ -1,18 +1,13 @@
-package pliesveld.bridge;
+package pliesveld.bridge.web;
 
-import org.apache.wicket.Component;
-import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
-import org.apache.wicket.markup.repeater.RepeatingView;
-import org.apache.wicket.util.value.ValueMap;
+import pliesveld.bridge.WicketApplication;
 import pliesveld.bridge.model.*;
 
 import java.util.List;

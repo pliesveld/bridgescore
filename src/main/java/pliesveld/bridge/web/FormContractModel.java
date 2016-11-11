@@ -1,4 +1,4 @@
-package pliesveld.bridge;
+package pliesveld.bridge.web;
 
 import org.apache.wicket.util.io.IClusterable;
 

@@ -1,27 +1,18 @@
-package pliesveld.bridge;
+package pliesveld.bridge.web;
 
 
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.ClassAttributeModifier;
-import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.model.IModel;
 
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
 
-import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.Response;
-import org.apache.wicket.util.time.Duration;
+import pliesveld.bridge.WicketApplication;
 import pliesveld.bridge.model.BackScore;
 import pliesveld.bridge.model.BridgeGame;
 
 import java.io.Serializable;
-import java.util.Set;
-import java.util.TreeSet;
 
 
 /**

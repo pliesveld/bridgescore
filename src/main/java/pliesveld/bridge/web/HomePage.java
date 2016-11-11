@@ -1,4 +1,4 @@
-package pliesveld.bridge;
+package pliesveld.bridge.web;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,13 +8,13 @@ import org.apache.wicket.markup.html.basic.MultiLineLabel;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.ClientProperties;
 import org.apache.wicket.protocol.http.request.WebClientInfo;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 
+import pliesveld.bridge.WicketApplication;
 import pliesveld.bridge.model.*;
 
 public class HomePage extends WebPage {
