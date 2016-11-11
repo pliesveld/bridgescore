@@ -11,7 +11,9 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import pliesveld.bridge.model.*;
+import pliesveld.bridge.web.HomePage;
 
 
 /**
@@ -21,6 +23,7 @@ import pliesveld.bridge.model.*;
  * 
  * @see pliesveld.bridge.Start#main(String[])
  */
+@Component
 public class WicketApplication extends WebApplication
     implements ApplicationContextAware
 {
@@ -47,14 +50,14 @@ public class WicketApplication extends WebApplication
 	public void init()
 	{
 		super.init();
-//        getComponentInstantiationListeners().add(new SpringComponentInjector(this, ctx, true));
-        getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+        getComponentInstantiationListeners().add(new SpringComponentInjector(this, ctx, true));
         getDebugSettings().setDevelopmentUtilitiesEnabled(true);
         getDebugSettings().setAjaxDebugModeEnabled(false);
         getJavaScriptLibrarySettings().setJQueryReference(new UrlResourceReference(Url.parse("/vendors/jquery-2.1.4.min.js")));
 	}
 
-    @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ctx = applicationContext;
     }
 }
