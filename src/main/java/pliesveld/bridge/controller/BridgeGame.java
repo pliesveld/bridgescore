@@ -26,7 +26,6 @@ public class BridgeGame
     public void playHand(AuctionContract contract, int tricks)
     {
         BridgeHand bh = new BridgeHand(contract,tricks);
-
         List<ScoreMarkEntry> marksList = backScore.evaluateDeclarerPlay(contract, tricks);
         bh.setMarks(marksList);
         handHistory.add(0,bh);
@@ -50,16 +49,16 @@ public class BridgeGame
     private void updateCurrentDealer() {
         switch (dealer) {
             case SOUTH:
-                currentDealer = new String(playerNames[0]);
+                currentDealer = playerNames[0];
                 break;
             case WEST:
-                currentDealer = new String(playerNames[1]);
+                currentDealer = playerNames[1];
                 break;
             case NORTH:
-                currentDealer = new String(playerNames[2]);
+                currentDealer = playerNames[2];
                 break;
             case EAST:
-                currentDealer = new String(playerNames[3]);
+                currentDealer = playerNames[3];
                 break;
         }
     }
@@ -95,6 +94,8 @@ public class BridgeGame
             int tricks = hand.getTricks();
             playHand(ac,tricks);
         }
+        dealer = prev_dealer.next().next().next();
+        updateCurrentDealer();
     }
 
     public Seat getDealer() {
