@@ -15,7 +15,7 @@ import pliesveld.bridge.service.PlayerService;
 
 import java.util.Arrays;
 
-public class PlayerList extends WebPage {
+public class PlayerSet extends WebPage {
     private static final Logger LOG = LogManager.getLogger();
     private static final String[] REGULAR_PLAYERS = new String[]{ "Patrick", "Anthony", "Constantine", "Oleta" };
 
@@ -78,7 +78,7 @@ public class PlayerList extends WebPage {
     }
 
 
-    public PlayerList(PageParameters parameters) {
+    public PlayerSet(PageParameters parameters) {
         super(parameters);
         final PlayerSeatForm form = new PlayerSeatForm("playerSeatForm");
         add(form);

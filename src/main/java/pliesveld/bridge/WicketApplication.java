@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import pliesveld.bridge.controller.BridgeGame;
 import pliesveld.bridge.web.HomePage;
-import pliesveld.bridge.web.test.PlayerList;
+import pliesveld.bridge.web.test.PlayerSet;
 
 
 /**
@@ -60,7 +60,7 @@ public class WicketApplication extends WebApplication
         getDebugSettings().setDevelopmentUtilitiesEnabled(true);
         getDebugSettings().setAjaxDebugModeEnabled(false);
         getJavaScriptLibrarySettings().setJQueryReference(new UrlResourceReference(Url.parse("/vendors/jquery-2.1.4.min.js")));
-        this.mountPage("/playerlist", PlayerList.class);
+        this.mountPage("/playerset", PlayerSet.class);
 	}
 
     @Override
