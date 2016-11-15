@@ -1,5 +1,7 @@
 // vim: tabstop=4 shiftwidth=4 expandtab
-package pliesveld.bridge.model;
+package pliesveld.bridge.controller;
+
+import pliesveld.bridge.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
