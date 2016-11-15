@@ -6,34 +6,34 @@ package pliesveld.bridge.model;
 public enum Seat
 {
     SOUTH {
-        Team team()
+        public Team team()
         { return Team.TEAM_NS; }
 
-        Seat next()
+        public Seat next()
         { return Seat.WEST; }
     },
     WEST {
-        Team team()
+        public Team team()
         { return Team.TEAM_WE; }
 
-        Seat next()
+        public Seat next()
         { return Seat.NORTH; }
     },
     NORTH {
-        Team team()
+        public Team team()
         { return Team.TEAM_NS; }
 
-        Seat next()
+        public Seat next()
         { return Seat.EAST; }
     },
     EAST {
-        Team team()
+        public Team team()
         { return Team.TEAM_WE; }
 
-        Seat next()
+        public Seat next()
         { return Seat.SOUTH; }
     };
 
-    abstract Team team();
-    abstract Seat next();
+    public abstract Team team();
+    public abstract Seat next();
 }

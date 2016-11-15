@@ -3,34 +3,43 @@ package pliesveld.bridge.web;
 
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.MarkupStream;
-import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.*;
 
 import org.apache.wicket.markup.html.basic.Label;
 
-import org.apache.wicket.model.PropertyModel;
-import pliesveld.bridge.WicketApplication;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pliesveld.bridge.model.BackScore;
-import pliesveld.bridge.model.BridgeGame;
+import pliesveld.bridge.controller.BridgeGame;
+import pliesveld.bridge.model.Seat;
+import pliesveld.bridge.service.PlayerService;
+import pliesveld.bridge.web.test.FormPlayerModel;
 
 import java.io.Serializable;
 
-
-/**
- * Displays history of past games
- */
-
 public class ScorePanel extends BasePanel
 {
+    @SpringBean
+    private PlayerService playerService;
 
-    ScorePanel(String id)
+    @SpringBean
+    private BridgeGame bridgeGame;
+
+    public ScorePanel(String id)
     {
         super(id);
-
-        BridgeGame bridgeGame = ((WicketApplication)getApplication()).getGame();
         BackScore bridgeScore = bridgeGame.getBridgeScore();
 
-        Label score1_vulnerbale = new LabelVulnerable("score_team1_vulnerable",new PropertyModel<>(bridgeGame,"team1vuln"));
-        Label score2_vulnerbale = new LabelVulnerable("score_team2_vulnerable",new PropertyModel<>(bridgeGame,"team2vuln"));
+        add(new Label("player_south", new PropertyModel<>(bridgeGame, "playerNames.0")));
+        add(new Label("player_west", new PropertyModel<>(bridgeGame, "playerNames.1")));
+        add(new Label("player_north", new PropertyModel<>(bridgeGame, "playerNames.2")));
+        add(new Label("player_east", new PropertyModel<>(bridgeGame, "playerNames.3")));
+
+
+        Label score1_vulnerbale = new VulnerabilityLabel("score_team1_vulnerable",new PropertyModel<>(bridgeGame,"team1vuln"));
+        Label score2_vulnerbale = new VulnerabilityLabel("score_team2_vulnerable",new PropertyModel<>(bridgeGame,"team2vuln"));
+
 
         /*
                 Use attribute modifier to add modify class tag
@@ -53,7 +62,8 @@ public class ScorePanel extends BasePanel
         add(new Label("score_team1_partial",model_score1_partial));
         add(new Label("score_team2_partial",model_score2_partial));
 
-        add(new Label("dealer",new PropertyModel<>(bridgeGame,"dealer")));
+        IModel<String> dealer = new PropertyModel<>(bridgeGame, "currentDealer");
+        add(new Label("dealer", dealer)).setOutputMarkupId(true);
 
         setOutputMarkupId(true);
     }
@@ -65,13 +75,13 @@ public class ScorePanel extends BasePanel
         adds to class tag "vulnerable" when underlying model is true.
         modifies markup to return string "vulnerable" when true
      */
-    class LabelVulnerable extends Label
+    class VulnerabilityLabel extends Label
     {
-        public LabelVulnerable(String id, IModel<?> model) {
+        public VulnerabilityLabel(String id, IModel<?> model) {
             super(id, model);
         }
 
-        public LabelVulnerable(String id, Serializable label) {
+        public VulnerabilityLabel(String id, Serializable label) {
             super(id, label);
         }
 

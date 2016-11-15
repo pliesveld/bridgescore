@@ -5,7 +5,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pliesveld.bridge.WicketApplication;
-import pliesveld.bridge.model.BridgeGame;
+import pliesveld.bridge.controller.BridgeGame;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Base class for all panels
@@ -13,9 +14,10 @@ import pliesveld.bridge.model.BridgeGame;
 public class BasePanel extends Panel {
     protected static final Logger LOG = LogManager.getLogger();
 
+    @Deprecated
     protected BridgeGame getBridgeGame()
     {
-        return ((WicketApplication)getApplication()).getGame();
+        throw new NotImplementedException();
     }
 
     public BasePanel(String id) {

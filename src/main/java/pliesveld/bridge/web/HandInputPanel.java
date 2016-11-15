@@ -1,22 +1,36 @@
 package pliesveld.bridge.web;
 
 
-import org.apache.wicket.markup.html.form.RadioChoice;
-import org.apache.wicket.markup.html.form.IFormSubmitter;
-import org.apache.wicket.markup.html.form.RangeTextField;
-import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.pages.RedirectPage;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.Url;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import pliesveld.bridge.controller.BridgeGame;
 import pliesveld.bridge.model.*;
+import pliesveld.bridge.service.PlayerService;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class HandInputPanel extends BasePanel {
 
+    @SpringBean
+    private BridgeGame bridgeGame;
+
+    @SpringBean
+    private PlayerService playerService;
+
+    public static class PlayerRenderer extends ChoiceRenderer<Seat> {
+        @Override public String getIdValue(Seat object, int index) {
+            String orig = super.getIdValue(object, index);
+            return orig + "!!!" + orig;
+        }
+    }
     private class ContractForm
             extends StatelessForm<FormContractModel>
     {
@@ -34,7 +48,8 @@ public class HandInputPanel extends BasePanel {
 
             setMarkupId("auctionForm");
 
-            final RadioChoice choiceSeat = new RadioChoice("seat", Arrays.asList(Seat.values()));
+//            final PlayerSelection choiceSeat = new PlayerSelection("seat", new RadioChoice("seat", Arrays.asList(Seat.values())),new PlayerRenderer());
+            final RadioChoice choiceSeat = new RadioChoice("seat",Arrays.asList(Seat.values()),new PlayerRenderer());
             choiceSeat.setRequired(true);
             choiceSeat.setMarkupId( "real_seatid" );
             add(choiceSeat);
@@ -70,14 +85,12 @@ public class HandInputPanel extends BasePanel {
         @Override
         protected void callOnError(IFormSubmitter submitter) {
             LOG.trace("auction form callOnError()");
-            // TODO Auto-generated method stub
             super.callOnError(submitter);
         }
 
         @Override
         protected void onError() {
             LOG.trace("auction form onError()");
-            // TODO Auto-generated method stub
             super.onError();
 
             PageParameters parameters = new PageParameters();
@@ -107,16 +120,12 @@ public class HandInputPanel extends BasePanel {
                 LOG.info(fcm);
 
                 int tricks_made = fcm.getTricks();
-                AuctionContract ac = new AuctionContract(fcm.getSeat(),fcm.getSuit(),fcm.getLevel(),fcm.getPenalty());
-
-                BridgeGame bridgeGame = getBridgeGame();
+                String playerName = playerService.getPlayerAt(fcm.getSeat());
+                AuctionContract ac = new AuctionContract(fcm.getSeat(),playerName, fcm.getSuit(),fcm.getLevel(),fcm.getPenalty());
                 bridgeGame.playHand(ac, tricks_made);
             }
 
         }
-      
-        
-
     }
 
     public HandInputPanel(String id) {

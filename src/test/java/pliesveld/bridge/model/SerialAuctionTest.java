@@ -32,9 +32,10 @@ public class SerialAuctionTest {
         Seat a = Seat.EAST;
         Suit s = Suit.SPADES;
         int l = 6;
+        String n = "n";
         Penalty p = Penalty.REDOUBLED;
 
-        AuctionContract ac = new AuctionContract(a,s,l,p);
+        AuctionContract ac = new AuctionContract(a,n,s,l,p);
 
         ObjectOutputStream out = new ObjectOutputStream(
                 new FileOutputStream("auction.out"));

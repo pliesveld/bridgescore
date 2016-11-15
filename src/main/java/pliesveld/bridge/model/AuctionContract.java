@@ -9,26 +9,30 @@ public class AuctionContract
     implements Serializable
 {
     private Seat declarer;
+    private String declarerName;
     private Suit suit;
     private int level;
     private Penalty penalty;
 
-    public AuctionContract(Seat declarer, Suit suit, int level, Penalty penalty)
+    public AuctionContract(Seat declarer, String declarerName, Suit suit, int level, Penalty penalty)
     {
         this.declarer = declarer;
+        this.declarerName = declarerName;
         this.suit = suit;
         this.level = level;
         this.penalty = penalty;
     }
 
-    public AuctionContract(Seat declarer, Suit suit, int level)
+    public AuctionContract(Seat declarer, String declarerName, Suit suit, int level)
     {
-        this(declarer,suit,level,Penalty.UNDOUBLED);
+        this(declarer, declarerName, suit, level, Penalty.UNDOUBLED);
     }
 
     public Seat getDeclarer() {
         return declarer;
     }
+
+    public String getDeclarerName() { return declarerName; }
 
     public void setDeclarer(Seat declarer) {
         this.declarer = declarer;

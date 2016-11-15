@@ -1,17 +1,22 @@
 // vim: tabstop=4 shiftwidth=4 expandtab
 package pliesveld.bridge.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import pliesveld.bridge.service.PlayerService;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class BridgeHand 
+public class BridgeHand
     implements Serializable
 {
     private AuctionContract contract;
     private int tricks;
     private List<ScoreMarkEntry> marks;
 
-    BridgeHand(AuctionContract contract, int tricks)
+    public BridgeHand(AuctionContract contract, int tricks)
     {
         this.setContract(contract);
         this.setTricks(tricks);
@@ -44,7 +49,7 @@ public class BridgeHand
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder(32);
+        StringBuilder sb = new StringBuilder(45);
         AuctionContract ac = getContract();
 
         int expected = 6 + ac.getLevel();
@@ -57,6 +62,7 @@ public class BridgeHand
             sb.append("MADE ");
         }
         sb.append(ac.getDeclarer());
+//        sb.append(playerService.getPlayerAt(ac.getDeclarer()));
         sb.append(' ');
         sb.append(ac.getLevel());
         sb.append(ac.getSuit());

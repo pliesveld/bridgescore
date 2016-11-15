@@ -4,6 +4,7 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
+import pliesveld.bridge.web.HomePage;
 
 // TODO: add testing models https://ci.apache.org/projects/wicket/guide/6.x/guide/testing.html#testing_1
 

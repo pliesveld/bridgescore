@@ -1,15 +1,34 @@
 package pliesveld.bridge.web.test;
 
+import org.apache.wicket.model.AbstractPropertyModel;
+import org.apache.wicket.model.AbstractWrapModel;
 import org.apache.wicket.util.io.IClusterable;
+import org.springframework.stereotype.Component;
 
-/**
-* Created by happs on 11/11/16.
-*/
-public final class FormPlayerModel implements IClusterable {
-    String player_south;
-    String player_west;
-    String player_north;
-    String player_east;
+import java.io.Serializable;
+
+public class FormPlayerModel implements IClusterable, Serializable {
+    String player_south = "sOUtH";
+    String player_west = "wESt";
+    String player_north = "nORTh";
+    String player_east = "eASt";
+
+    public String getPlayer_south() {
+        return player_south;
+    }
+
+    public String getPlayer_west() {
+        return player_west;
+    }
+
+    public String getPlayer_north() {
+        return player_north;
+    }
+
+    public String getPlayer_east() {
+        return player_east;
+    }
+
 
     @Override public String toString() {
         return "FormPlayerModel{" +
@@ -20,3 +39,4 @@ public final class FormPlayerModel implements IClusterable {
                 '}';
     }
 }
+

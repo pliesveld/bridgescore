@@ -29,6 +29,7 @@ public class ScoreTest
         AuctionContract contract = null;
 
         Seat us = Seat.SOUTH;
+        String name = "name";
         Seat them = Seat.WEST;
 
         assertFalse(score_card.isVulnerable(us.team()));
@@ -39,12 +40,12 @@ public class ScoreTest
         assertEquals(0,score_card.pointsPartial(them.team()));
 
 
-        contract = new AuctionContract(us,SPADES,2);
+        contract = new AuctionContract(us,name,SPADES,2);
         score_card.evaluateDeclarerPlay(contract,8);
         assertEquals(60,score_card.pointsPartial(us.team()));
         assertEquals(0,score_card.pointsPartial(them.team()));
 
-        contract = new AuctionContract(them,HEARTS,3);
+        contract = new AuctionContract(them,name,HEARTS,3);
         score_card.evaluateDeclarerPlay(contract,10);
         assertEquals(60,score_card.pointsPartial(us.team()));
         assertEquals(90,score_card.pointsPartial(them.team()));
@@ -53,7 +54,7 @@ public class ScoreTest
         assertFalse(score_card.isVulnerable(us.team()));
         assertFalse(score_card.isVulnerable(them.team()));
 
-        contract = new AuctionContract(us,NOTRUMP,1);
+        contract = new AuctionContract(us,name,NOTRUMP,1);
         score_card.evaluateDeclarerPlay(contract,7);
         assertEquals(100,score_card.pointsTotal(us.team()));
         assertEquals(120,score_card.pointsTotal(them.team()));
@@ -63,12 +64,12 @@ public class ScoreTest
         assertTrue(score_card.isVulnerable(us.team()));
         assertFalse(score_card.isVulnerable(them.team()));
 
-        contract = new AuctionContract(them,HEARTS,1);
+        contract = new AuctionContract(them,name,HEARTS,1);
         score_card.evaluateDeclarerPlay(contract,7);
         assertEquals(0,score_card.pointsPartial(us.team()));
         assertEquals(30,score_card.pointsPartial(them.team()));
 
-        contract = new AuctionContract(them,SPADES,3);
+        contract = new AuctionContract(them,name,SPADES,3);
         score_card.evaluateDeclarerPlay(contract,11);
 
         assertTrue(score_card.isVulnerable(us.team()));
@@ -85,7 +86,7 @@ public class ScoreTest
             2 overtricks in NT: 60
             rubber in 2: 500
          */
-        contract = new AuctionContract(us,NOTRUMP,3);
+        contract = new AuctionContract(us,name,NOTRUMP,3);
         score_card.evaluateDeclarerPlay(contract,11);
         assertEquals(100 + 100 + 60 + 500,score_card.pointsTotal(us.team()));
         assertEquals(300,score_card.pointsTotal(them.team()));
@@ -106,6 +107,7 @@ public class ScoreTest
         AuctionContract contract = null;
 
         Seat us = Seat.SOUTH;
+        String name = "name";
         Seat them = Seat.WEST;
 
         assertFalse(score_card.isVulnerable(us.team()));
@@ -116,7 +118,7 @@ public class ScoreTest
         assertEquals(0,score_card.pointsPartial(them.team()));
 
         /* took 6 tricks, but did not bid it */
-        contract = new AuctionContract(us,HEARTS,4);
+        contract = new AuctionContract(us,name,HEARTS,4);
         score_card.evaluateDeclarerPlay(contract,12);
         assertEquals(180,score_card.pointsTotal(us.team()));
         assertEquals(0,score_card.pointsTotal(them.team()));
@@ -124,7 +126,7 @@ public class ScoreTest
         assertFalse(score_card.isVulnerable(them.team()));
 
         /* bid and made 6: +500 for small slam */
-        contract = new AuctionContract(them,HEARTS,6);
+        contract = new AuctionContract(them,name,HEARTS,6);
         score_card.evaluateDeclarerPlay(contract,12);
         assertEquals(180,score_card.pointsTotal(us.team()));
         assertEquals(6*30 + 500,score_card.pointsTotal(them.team()));
@@ -138,7 +140,7 @@ public class ScoreTest
         6NT:    +190 ( 6*30 + 10 )
         rubber in two games: +500
          */
-        contract = new AuctionContract(us,NOTRUMP,6);
+        contract = new AuctionContract(us,name,NOTRUMP,6);
         score_card.evaluateDeclarerPlay(contract,12);
         assertEquals(180 + 750 + 190 + 500,score_card.pointsTotal(us.team()));
         assertEquals(680,score_card.pointsTotal(them.team()));
@@ -154,6 +156,7 @@ public class ScoreTest
         AuctionContract contract = null;
 
         Seat us = Seat.SOUTH;
+        String name = "name";
         Seat them = Seat.WEST;
 
         assertFalse(score_card.isVulnerable(us.team()));
@@ -164,7 +167,7 @@ public class ScoreTest
         assertEquals(0,score_card.pointsPartial(them.team()));
 
         /* down two */
-        contract = new AuctionContract(us,HEARTS,4);
+        contract = new AuctionContract(us,name,HEARTS,4);
         score_card.evaluateDeclarerPlay(contract,8);
         assertEquals(0,score_card.pointsTotal(us.team()));
         assertEquals(100, score_card.pointsTotal(them.team()));
@@ -174,7 +177,7 @@ public class ScoreTest
         assertFalse(score_card.isVulnerable(them.team()));
 
         /* we bid and make game: 4s */
-        contract = new AuctionContract(us,SPADES,4);
+        contract = new AuctionContract(us,name,SPADES,4);
         score_card.evaluateDeclarerPlay(contract,10);
         assertEquals(120,score_card.pointsTotal(us.team()));
         assertEquals(100, score_card.pointsTotal(them.team()));
@@ -188,7 +191,7 @@ public class ScoreTest
         * down-two vuln = 100 per
         *               = 200
         *               */
-        contract = new AuctionContract(us,HEARTS,4);
+        contract = new AuctionContract(us,name,HEARTS,4);
         score_card.evaluateDeclarerPlay(contract,8);
         assertEquals(120,score_card.pointsTotal(us.team()));
         assertEquals(100 + 200,score_card.pointsTotal(them.team()));
@@ -208,6 +211,7 @@ public class ScoreTest
         AuctionContract contract = null;
 
         Seat us = Seat.SOUTH;
+        String name = "name";
         Seat them = Seat.WEST;
 
         assertFalse(score_card.isVulnerable(us.team()));
@@ -218,7 +222,7 @@ public class ScoreTest
         assertEquals(0,score_card.pointsPartial(them.team()));
 
         /* made 1NT doubled with +1 overtrick */
-        contract = new AuctionContract(us,NOTRUMP,1,DOUBLED);
+        contract = new AuctionContract(us,name,NOTRUMP,1,DOUBLED);
         score_card.evaluateDeclarerPlay(contract,7);
         assertEquals(80,score_card.pointsPartial(us.team()));
         assertEquals(0,score_card.pointsPartial(them.team()));
@@ -227,7 +231,7 @@ public class ScoreTest
         assertFalse(score_card.isVulnerable(us.team()));
         assertFalse(score_card.isVulnerable(them.team()));
 
-        contract = new AuctionContract(them,SPADES,2,DOUBLED);
+        contract = new AuctionContract(them,name,SPADES,2,DOUBLED);
         score_card.evaluateDeclarerPlay(contract,8);
         assertFalse(score_card.isVulnerable(us.team()));
         assertTrue(score_card.isVulnerable(them.team())); /* we doubled them to game! */
@@ -247,7 +251,7 @@ public class ScoreTest
             overtrick:
                 vulnerable doubled overtrick, each: +200
         */
-        contract = new AuctionContract(them,HEARTS,4,DOUBLED);
+        contract = new AuctionContract(them,name,HEARTS,4,DOUBLED);
         score_card.evaluateDeclarerPlay(contract,11);
         assertFalse(score_card.isVulnerable(us.team()));
         assertFalse(score_card.isVulnerable(them.team()));
@@ -267,6 +271,7 @@ public class ScoreTest
         AuctionContract contract = null;
 
         Seat us = Seat.SOUTH;
+        String name = "name";
         Seat them = Seat.WEST;
 
         assertFalse(score_card.isVulnerable(us.team()));
@@ -280,7 +285,7 @@ public class ScoreTest
          *
           * -100 + 200*3
           * */
-        contract = new AuctionContract(us,NOTRUMP,4,DOUBLED);
+        contract = new AuctionContract(us,name,NOTRUMP,4,DOUBLED);
         score_card.evaluateDeclarerPlay(contract,7);
         assertEquals(0,score_card.pointsTotal(us.team()));
         assertEquals(500, score_card.pointsTotal(them.team()));
@@ -298,7 +303,7 @@ public class ScoreTest
 
                +500: non-vulnerable slam
          */
-        contract = new AuctionContract(us,CLUBS,6,REDOUBLED);
+        contract = new AuctionContract(us,name,CLUBS,6,REDOUBLED);
         score_card.evaluateDeclarerPlay(contract,12);
         assertEquals(480 + 50 + 500,score_card.pointsTotal(us.team()));
         assertEquals(500, score_card.pointsTotal(them.team()));
@@ -321,7 +326,7 @@ public class ScoreTest
             Redoubled *= 2
                        = 1000
          */
-        contract = new AuctionContract(us,CLUBS,1,REDOUBLED);
+        contract = new AuctionContract(us,name,CLUBS,1,REDOUBLED);
         score_card.evaluateDeclarerPlay(contract,5);
         assertEquals(1030,score_card.pointsTotal(us.team()));
         assertEquals(1000 + 500, score_card.pointsTotal(them.team()));
@@ -329,11 +334,6 @@ public class ScoreTest
         assertEquals(0,score_card.pointsPartial(them.team()));
         assertTrue(score_card.isVulnerable(us.team()));
         assertFalse(score_card.isVulnerable(them.team()));
-
-
-	System.out.println(score_card);
+	    System.out.println(score_card);
     }
-
 }
-
-

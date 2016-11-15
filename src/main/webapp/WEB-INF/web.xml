@@ -5,6 +5,10 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://www.oracle.com/webf
 version="3.0">
   <display-name>bridgescore</display-name>
 
+  <session-config>
+    <tracking-mode>COOKIE</tracking-mode>
+  </session-config>
+
   <!-- Spring Configuration Class for Beans -->
   <context-param>
     <param-name>contextClass</param-name>

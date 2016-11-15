@@ -14,8 +14,9 @@ import org.apache.wicket.protocol.http.request.WebClientInfo;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import pliesveld.bridge.WicketApplication;
-import pliesveld.bridge.model.*;
+import pliesveld.bridge.controller.BridgeGame;
 
 public class HomePage extends WebPage {
 
@@ -28,6 +29,7 @@ public class HomePage extends WebPage {
     protected ScorePanel panelScore;
     protected RubberPanel panelRubber;
 
+    @SpringBean
     private BridgeGame bridgeGame;
 
 
@@ -35,8 +37,6 @@ public class HomePage extends WebPage {
 		super(parameters);
 
         stripTags = ((WicketApplication)getApplication()).getMarkupSettings().getStripWicketTags();
-
-        bridgeGame = ((WicketApplication)getApplication()).getGame();
 
         panelForm = new HandInputPanel("hand-input-panel");
         panelForm.setRenderBodyOnly(true);

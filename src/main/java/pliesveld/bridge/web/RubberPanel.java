@@ -7,7 +7,9 @@ import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import pliesveld.bridge.WicketApplication;
+import pliesveld.bridge.controller.BridgeGame;
 import pliesveld.bridge.model.*;
 
 import java.util.List;
@@ -19,12 +21,14 @@ import java.util.List;
 public class RubberPanel extends BasePanel
 {
 
+    @SpringBean
+    private BridgeGame bridgeGame;
 
     RubberPanel(String id)
     {
         super(id);
 
-        List<BridgeHand> list_hands = ((WicketApplication)getApplication()).getGame().getHandHistory();
+        List<BridgeHand> list_hands = bridgeGame.getHandHistory();
 
         ListView<BridgeHand> bridgehandListView = new ListView<BridgeHand>("hand_list",list_hands) {
             @Override
