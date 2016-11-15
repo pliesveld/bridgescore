@@ -12,6 +12,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.stereotype.Component;
 import pliesveld.bridge.controller.BridgeGame;
 import pliesveld.bridge.service.PlayerService;
+import pliesveld.bridge.web.HomePage;
 
 import java.util.Arrays;
 
@@ -65,6 +66,7 @@ public class PlayerSet extends WebPage {
 
             bridgeGame.setPlayerNames(names);
             super.onSubmit();
+            getRequestCycle().setResponsePage(HomePage.class);
         }
 
         @Override protected void onError() {

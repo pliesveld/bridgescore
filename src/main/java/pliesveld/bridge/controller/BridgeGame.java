@@ -72,6 +72,7 @@ public class BridgeGame
         backScore.clear();
         team1vuln = false;
         team2vuln = false;
+        updateCurrentDealer();
     }
 
     /* removes last game from history
@@ -106,6 +107,8 @@ public class BridgeGame
         this.dealer = dealer;
     }
 
+    public String getCurrentDealer() { return currentDealer; }
+
     public String[] getPlayerNames() {
         return playerNames;
     }
@@ -116,5 +119,6 @@ public class BridgeGame
         Assert.notEmpty(playerNames);
         Assert.isTrue(playerNames.length == 4);
         this.playerNames = playerNames;
+        updateCurrentDealer();
     }
 }

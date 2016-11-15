@@ -49,7 +49,7 @@ public class HandInputPanel extends BasePanel {
             setMarkupId("auctionForm");
 
 //            final PlayerSelection choiceSeat = new PlayerSelection("seat", new RadioChoice("seat", Arrays.asList(Seat.values())),new PlayerRenderer());
-            final RadioChoice choiceSeat = new RadioChoice("seat",Arrays.asList(Seat.values()),new PlayerRenderer());
+            final RadioChoice choiceSeat = new RadioChoice("seat", Arrays.asList(Seat.values()));
             choiceSeat.setRequired(true);
             choiceSeat.setMarkupId( "real_seatid" );
             add(choiceSeat);

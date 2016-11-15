@@ -41,7 +41,7 @@
         <ul data-role="listview" data-theme="e" data-divider-theme="c">
             <li data-role="list-divider">table options</li>
             <li><a href="#page1" wicket:id="link-nextdealer" class="ui-icon-recycle">change dealer</a></li>
-            <li><a href="#" class="ui-icon-comment">rename players</a></li>
+            <li><a href="#dialog_players_rename" class="ui-icon-comment">rename players</a></li>
             <li><a href="#dialog_confirm_reset"  class="ui-icon-delete">reset score</a></li>
             <li><a href="#dialog_confirm_reset_last_game" class="ui-icon-recycle">remove last score</a></li>
             <li data-role="list-divider">service options</li>
@@ -63,8 +63,8 @@
         <h3>This is a placeholder for renaming players.</h3>
         <div class="ui-fieldcontain ui-hide-label">
             <fieldset data-role="controlgroup">
-<!--                <select wicket:id='seat'></select> -->
-                <input type="text">
+                <a href="/playerset" class="ui-btn ui-shadow ui-corner-all">Rename players</a>
+
             </fieldset>
         </div>
 

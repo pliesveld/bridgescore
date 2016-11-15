@@ -62,8 +62,11 @@ public class ScorePanel extends BasePanel
         add(new Label("score_team1_partial",model_score1_partial));
         add(new Label("score_team2_partial",model_score2_partial));
 
-        IModel<String> dealer = new PropertyModel<>(bridgeGame, "currentDealer");
-        add(new Label("dealer", dealer)).setOutputMarkupId(true);
+        IModel<String> currentDealer = new PropertyModel<>(bridgeGame, "currentDealer");
+        add(new Label("currentDealer", currentDealer));
+
+        IModel<String> dealer = new PropertyModel<>(bridgeGame, "dealer");
+        add(new Label("dealer", dealer));
 
         setOutputMarkupId(true);
     }
