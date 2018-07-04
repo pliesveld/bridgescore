@@ -20,6 +20,8 @@ public final class FormContractModel implements IClusterable {
     private Penalty penalty = Penalty.UNDOUBLED;
     private int tricks = 7;
 
+    private String south = "SOUTHERN";
+
     @Override
     public String toString()
     {
@@ -94,5 +96,13 @@ public final class FormContractModel implements IClusterable {
 
     public void setTricks(int tricks) {
         this.tricks = tricks;
+    }
+
+    public String getSouth() {
+        return south;
+    }
+
+    public void setSouth(String south) {
+        //this.south = south;
     }
 }

@@ -2,7 +2,6 @@ package pliesveld.bridge.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import pliesveld.bridge.controller.BridgeGame;
 import pliesveld.bridge.model.Seat;
 import pliesveld.bridge.web.test.FormPlayerModel;
@@ -30,10 +29,7 @@ public class PlayerService {
                 name = names[3];
                 break;
         }
-
-        if (!StringUtils.hasLength(name)) {
-            name = seat.name();
-        }
         return name;
     }
 }
+

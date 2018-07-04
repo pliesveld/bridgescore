@@ -1,6 +1,7 @@
 package pliesveld.bridge.web;
 
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.pages.RedirectPage;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -26,15 +27,17 @@ public class HandInputPanel extends BasePanel {
     private PlayerService playerService;
 
     public static class PlayerRenderer extends ChoiceRenderer<Seat> {
-        @Override public String getIdValue(Seat object, int index) {
-            String orig = super.getIdValue(object, index);
-            return orig + "!!!" + orig;
+        @Override
+        public Object getDisplayValue(Seat object) {
+            return "12345";
         }
     }
     private class ContractForm
             extends StatelessForm<FormContractModel>
     {
         private FormContractModel _formContractModel = new FormContractModel();
+
+        private PlayerRenderer _playerRenderer = new PlayerRenderer();
 
         public ContractForm(final String id)
         {
@@ -48,7 +51,7 @@ public class HandInputPanel extends BasePanel {
 
             setMarkupId("auctionForm");
 
-//            final PlayerSelection choiceSeat = new PlayerSelection("seat", new RadioChoice("seat", Arrays.asList(Seat.values())),new PlayerRenderer());
+
             final RadioChoice choiceSeat = new RadioChoice("seat", Arrays.asList(Seat.values()));
             choiceSeat.setRequired(true);
             choiceSeat.setMarkupId( "real_seatid" );
@@ -132,5 +135,9 @@ public class HandInputPanel extends BasePanel {
         super(id);
         final ContractForm form = new ContractForm("auctionForm");
         add(form);
+        add(new Label("seat-south", playerService.getPlayerAt(Seat.SOUTH)));
+        add(new Label("seat-west", playerService.getPlayerAt(Seat.WEST)));
+        add(new Label("seat-north", playerService.getPlayerAt(Seat.NORTH)));
+        add(new Label("seat-east", playerService.getPlayerAt(Seat.EAST)));
     }
 }

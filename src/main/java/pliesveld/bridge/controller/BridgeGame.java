@@ -1,9 +1,11 @@
-// vim: tabstop=4 shiftwidth=4 expandtab
 package pliesveld.bridge.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
+
+
 import pliesveld.bridge.model.*;
+import pliesveld.bridge.service.PlayerService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,12 +25,17 @@ public class BridgeGame
     private boolean team1vuln = false;
     private boolean team2vuln = false;
 
+    @Autowired
+    private PlayerService playerService;
+
     public void playHand(AuctionContract contract, int tricks)
     {
-        BridgeHand bh = new BridgeHand(contract,tricks);
+        BridgeHand bridgeHand = new BridgeHand(contract,tricks);
+        bridgeHand.setDeclarer(playerService.getPlayerAt(contract.getDeclarer()));
         List<ScoreMarkEntry> marksList = backScore.evaluateDeclarerPlay(contract, tricks);
-        bh.setMarks(marksList);
-        handHistory.add(0,bh);
+        bridgeHand.setMarks(marksList);
+
+        handHistory.add(0,bridgeHand);
         dealer = dealer.next();
         updateCurrentDealer();
         team1vuln = backScore.isVulnerable(Team.TEAM_NS);
@@ -114,10 +121,10 @@ public class BridgeGame
     }
 
     public void setPlayerNames(String[] playerNames) {
-        Assert.notNull(playerNames);
-        Assert.noNullElements(playerNames);
-        Assert.notEmpty(playerNames);
-        Assert.isTrue(playerNames.length == 4);
+//        Assert.notNull(playerNames);
+//        Assert.noNullElements(playerNames);
+//        Assert.notEmpty(playerNames);
+//        Assert.isTrue(playerNames.length == 4);
         this.playerNames = playerNames;
         updateCurrentDealer();
     }
